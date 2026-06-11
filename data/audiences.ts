@@ -3,6 +3,7 @@ export type AudienceId = 'merchant' | 'affiliate' | 'distributor' | 'manufacture
 export type AudienceConfig = {
   id: AudienceId;
   label: string;
+  sectionId: string;
   headline: string;
   summary: string;
   positioning: string;
@@ -13,7 +14,8 @@ export type AudienceConfig = {
 export const AUDIENCES: AudienceConfig[] = [
   {
     id: 'merchant',
-    label: 'Merchants',
+    label: 'Retailers',
+    sectionId: 'retailers',
     headline: 'Restock wholesale',
     summary: 'Pay with verified settlement. Track every order from market floor to delivery.',
     positioning:
@@ -24,6 +26,7 @@ export const AUDIENCES: AudienceConfig[] = [
   {
     id: 'distributor',
     label: 'Distributors',
+    sectionId: 'distributors',
     headline: 'Fulfill with clarity',
     summary: 'Virtual warehouse ledger, instant 95% payout, demand you can see.',
     positioning:
@@ -33,7 +36,8 @@ export const AUDIENCES: AudienceConfig[] = [
   },
   {
     id: 'affiliate',
-    label: 'Affiliates',
+    label: 'Partners',
+    sectionId: 'partners',
     headline: 'Grow the network',
     summary: 'Refer verified traders. Earn when they complete their first settled order.',
     positioning:
@@ -44,6 +48,7 @@ export const AUDIENCES: AudienceConfig[] = [
   {
     id: 'manufacturer',
     label: 'Manufacturers',
+    sectionId: 'manufacturer',
     headline: 'Serious upstream business',
     summary: 'Demand telemetry, SmartSubsidy campaigns, and tier-1 procurement as density matures.',
     positioning:
@@ -54,6 +59,7 @@ export const AUDIENCES: AudienceConfig[] = [
   {
     id: 'logistics',
     label: 'Logistics',
+    sectionId: 'logistics',
     headline: 'Partner, don’t compete',
     summary: 'Verified delivery on trade lanes. You fulfill; OpenMarket coordinates and routes demand.',
     positioning:
@@ -61,4 +67,10 @@ export const AUDIENCES: AudienceConfig[] = [
     registerCta: 'Register as logistics partner',
     anchor: '#register-logistics',
   },
+];
+
+export const SITE_NAV = [
+  { href: '#markets', label: 'Markets' },
+  { href: '#platform', label: 'Platform' },
+  ...AUDIENCES.map((a) => ({ href: `#${a.sectionId}`, label: a.label })),
 ];

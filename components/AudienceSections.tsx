@@ -62,7 +62,7 @@ export function AudienceSections() {
         return (
           <section
             key={audience.id}
-            id={audience.id === 'merchant' ? 'retailers' : audience.id === 'affiliate' ? 'partners' : audience.id}
+            id={audience.sectionId}
             className={`py-24 lg:py-32 ${index % 2 === 1 ? 'bg-surface/50' : ''}`}
           >
             <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">

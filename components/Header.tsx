@@ -2,17 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { SITE_NAV } from '@/data/audiences';
 import { BrandLogo } from './BrandLogo';
-
-const NAV = [
-  { href: '#markets', label: 'Markets' },
-  { href: '#platform', label: 'Platform' },
-  { href: '#retailers', label: 'Retailers' },
-  { href: '#distributors', label: 'Distributors' },
-  { href: '#partners', label: 'Partners' },
-  { href: '#manufacturer', label: 'Manufacturers' },
-  { href: '#logistics', label: 'Logistics' },
-];
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -25,11 +16,11 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-ink/95 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:h-[4.5rem] lg:px-10">
         <Link href="/" className="flex min-w-0 items-center" onClick={closeMenu}>
-          <BrandLogo variant="header" priority />
+          <BrandLogo variant="header" />
         </Link>
 
         <nav className="hidden items-center gap-5 xl:flex" aria-label="Primary">
-          {NAV.map((item) => (
+          {SITE_NAV.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -73,7 +64,7 @@ export function Header() {
       {open && (
         <nav className="border-t border-border bg-ink px-4 py-4 xl:hidden" aria-label="Mobile">
           <ul className="space-y-1">
-            {NAV.map((item) => (
+            {SITE_NAV.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}

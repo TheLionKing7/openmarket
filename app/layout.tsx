@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'OpenMarket Africa',
     description: 'Premier B2B trade infrastructure for Africa\'s open markets.',
-    images: ['/logo.png'],
+    images: ['/logo.svg'],
   },
 };
 

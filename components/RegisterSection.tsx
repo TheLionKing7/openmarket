@@ -2,11 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { AUDIENCES, type AudienceId } from '@/data/audiences';
-
-const inputClass =
-  'w-full rounded-xl border border-border bg-surface-elevated px-4 py-3 text-white outline-none ring-accent/50 transition focus:ring-2';
-
-const labelClass = 'mb-1.5 block text-xs font-medium text-muted';
+import { AudienceRegisterForm } from './AudienceRegisterForm';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -67,7 +63,7 @@ export function RegisterSection() {
   const current = AUDIENCES.find((a) => a.id === active)!;
 
   return (
-    <section id="register" className="border-t border-border py-24 lg:py-32">
+    <section id="register" className="border-t border-border bg-surface/30 py-24 lg:py-32">
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.35em] text-accent/80">Join the network</p>
@@ -75,8 +71,8 @@ export function RegisterSection() {
             Register for your lane
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted">
-            Select your role. We route each registration to the right onboarding path — merchant app,
-            distributor ledger, affiliate dashboard, manufacturer enterprise, or logistics partnership.
+            Each form captures what we need for your role — merchants, distributors, partners,
+            manufacturers, and logistics firms are onboarded separately.
           </p>
         </div>
 
@@ -91,8 +87,8 @@ export function RegisterSection() {
               onClick={() => selectAudience(a.id)}
               className={`rounded-full px-3 py-2 text-xs font-medium transition sm:px-4 sm:text-sm ${
                 active === a.id
-                  ? 'bg-primary text-white'
-                  : 'border border-border text-muted hover:border-accent/40 hover:text-white'
+                  ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                  : 'border border-border bg-ink/40 text-muted hover:border-accent/40 hover:text-white'
               }`}
             >
               {a.label}
@@ -100,183 +96,55 @@ export function RegisterSection() {
           ))}
         </div>
 
-        <div className="mt-8 rounded-2xl border border-border bg-surface-elevated/50 p-6 sm:p-8">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-accent">{current.label}</p>
-          <h3 className="mt-2 font-display text-2xl font-semibold text-white">{current.headline}</h3>
-          <p className="mt-2 text-sm text-muted">{current.positioning}</p>
+        <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface-elevated">
+          <div className="border-b border-border bg-ink/40 px-6 py-5 sm:px-8">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-accent">{current.label}</p>
+            <h3 className="mt-1 font-display text-2xl font-semibold text-white">{current.headline}</h3>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">{current.positioning}</p>
+          </div>
 
-          {formState === 'success' ? (
-            <div className="mt-8 rounded-xl border border-primary/40 bg-primary/10 p-6 text-center">
-              <p className="font-display text-xl text-white">Registration received.</p>
-              <p className="mt-2 text-sm text-muted">
-                We&apos;ll contact you within 48 hours to complete onboarding as a{' '}
-                {current.label.toLowerCase().replace(/s$/, '')}.
-              </p>
-              <button
-                type="button"
-                onClick={() => setFormState('idle')}
-                className="mt-6 text-sm font-semibold text-accent-soft hover:underline"
-              >
-                Submit another registration
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-              <input type="hidden" name="audience" value={active} />
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block">
-                  <span className={labelClass}>Full name</span>
-                  <input required name="name" className={inputClass} placeholder="Your name" />
-                </label>
-                <label className="block">
-                  <span className={labelClass}>WhatsApp / phone</span>
-                  <input required name="phone" type="tel" className={inputClass} placeholder="+234 …" />
-                </label>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <label className="block">
-                  <span className={labelClass}>Email</span>
-                  <input name="email" type="email" className={inputClass} placeholder="you@company.com" />
-                </label>
-                <label className="block">
-                  <span className={labelClass}>Business / company name</span>
-                  <input required name="business" className={inputClass} placeholder="Legal or trading name" />
-                </label>
-              </div>
-
-              {(active === 'merchant' || active === 'affiliate' || active === 'distributor') && (
-                <label className="block">
-                  <span className={labelClass}>Primary market hub</span>
-                  <input
-                    required
-                    name="marketHub"
-                    className={inputClass}
-                    placeholder="e.g. Alaba, Lagos · Kejetia, Kumasi"
-                  />
-                </label>
-              )}
-
-              {active === 'merchant' && (
-                <label className="block">
-                  <span className={labelClass}>Shop / stall name</span>
-                  <input required name="shopName" className={inputClass} placeholder="As customers know you" />
-                </label>
-              )}
-
-              {active === 'distributor' && (
-                <>
-                  <label className="block">
-                    <span className={labelClass}>Markets & regions served</span>
-                    <input
-                      required
-                      name="coverage"
-                      className={inputClass}
-                      placeholder="e.g. Mile 12, Mushin, Oke-Arin"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className={labelClass}>Approx. SKU lines in stock</span>
-                    <input name="skuCount" className={inputClass} placeholder="e.g. 120" />
-                  </label>
-                </>
-              )}
-
-              {active === 'affiliate' && (
-                <label className="block">
-                  <span className={labelClass}>How will you reach merchants?</span>
-                  <textarea
-                    required
-                    name="outreach"
-                    rows={3}
-                    className={inputClass}
-                    placeholder="Market association, delivery routes, community trust…"
-                  />
-                </label>
-              )}
-
-              {active === 'manufacturer' && (
-                <>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="block">
-                      <span className={labelClass}>Country of operations</span>
-                      <input required name="country" className={inputClass} placeholder="e.g. Nigeria" />
-                    </label>
-                    <label className="block">
-                      <span className={labelClass}>Primary category</span>
-                      <input
-                        required
-                        name="category"
-                        className={inputClass}
-                        placeholder="e.g. FMCG · Beverages · Textiles"
-                      />
-                    </label>
-                  </div>
-                  <label className="block">
-                    <span className={labelClass}>Interest</span>
-                    <select required name="manufacturerInterest" className={inputClass} defaultValue="">
-                      <option value="" disabled>
-                        Select primary interest
-                      </option>
-                      <option value="telemetry">Demand telemetry & market intelligence</option>
-                      <option value="subsidy">SmartSubsidy trade campaigns</option>
-                      <option value="procurement">Tier-1 procurement / distributor deals</option>
-                      <option value="all">Enterprise partnership — all lanes</option>
-                    </select>
-                  </label>
-                </>
-              )}
-
-              {active === 'logistics' && (
-                <>
-                  <label className="block">
-                    <span className={labelClass}>Corridors served</span>
-                    <input
-                      required
-                      name="corridors"
-                      className={inputClass}
-                      placeholder="e.g. Lagos ↔ Accra · South-East Nigeria"
-                    />
-                  </label>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <label className="block">
-                      <span className={labelClass}>Fleet / capacity</span>
-                      <input
-                        required
-                        name="fleet"
-                        className={inputClass}
-                        placeholder="e.g. 12 vans · 4 trucks"
-                      />
-                    </label>
-                    <label className="block">
-                      <span className={labelClass}>Operating license (optional)</span>
-                      <input name="license" className={inputClass} placeholder="Reg. number if applicable" />
-                    </label>
-                  </div>
-                </>
-              )}
-
-              <label className="block">
-                <span className={labelClass}>Anything else? (optional)</span>
-                <textarea name="notes" rows={2} className={inputClass} placeholder="Volume, timeline, questions…" />
-              </label>
-
-              {formState === 'error' && (
-                <p className="text-sm text-red-400" role="alert">
-                  {errorMsg}
+          <div className="p-6 sm:p-8">
+            {formState === 'success' ? (
+              <div className="rounded-xl border border-primary/40 bg-primary/10 p-8 text-center">
+                <p className="font-display text-xl text-white">Registration received.</p>
+                <p className="mt-2 text-sm text-muted">
+                  We&apos;ll contact you within 48 hours to complete onboarding as a{' '}
+                  {current.label.toLowerCase().replace(/s$/, '')}.
                 </p>
-              )}
+                <button
+                  type="button"
+                  onClick={() => setFormState('idle')}
+                  className="mt-6 text-sm font-semibold text-accent-soft hover:underline"
+                >
+                  Submit another registration
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <input type="hidden" name="audience" value={active} />
+                <AudienceRegisterForm audience={active} />
 
-              <button
-                type="submit"
-                disabled={formState === 'submitting'}
-                className="w-full rounded-full bg-primary py-4 text-sm font-semibold text-white transition hover:bg-primary-light disabled:opacity-60 sm:w-auto sm:px-12"
-              >
-                {formState === 'submitting' ? 'Submitting…' : current.registerCta}
-              </button>
-            </form>
-          )}
+                {formState === 'error' && (
+                  <p className="text-sm text-red-400" role="alert">
+                    {errorMsg}
+                  </p>
+                )}
+
+                <div className="flex flex-col gap-3 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-xs text-muted">
+                    By submitting, you agree to be contacted about OpenMarket Africa onboarding.
+                  </p>
+                  <button
+                    type="submit"
+                    disabled={formState === 'submitting'}
+                    className="shrink-0 rounded-full bg-primary px-10 py-3.5 text-sm font-semibold text-white transition hover:bg-primary-light disabled:opacity-60"
+                  >
+                    {formState === 'submitting' ? 'Submitting…' : current.registerCta}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </section>

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 3000",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "node -e \"if (!process.env.CI && !process.env.VERCEL) require('child_process').execSync('husky',{stdio:'inherit'})\""
   },
   "dependencies": {
     "next": "^15.3.3",

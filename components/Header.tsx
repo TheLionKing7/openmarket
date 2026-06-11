@@ -23,8 +23,8 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-ink/95 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
-        <Link href="/" className="min-w-0 shrink" onClick={closeMenu}>
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:h-[4.5rem] lg:px-10">
+        <Link href="/" className="flex min-w-0 items-center" onClick={closeMenu}>
           <BrandLogo variant="header" priority />
         </Link>
 

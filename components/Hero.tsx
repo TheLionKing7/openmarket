@@ -18,7 +18,7 @@ export function Hero() {
   );
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36 lg:pb-28">
+    <section className="relative overflow-hidden pt-24 pb-20 sm:pt-28 lg:pt-32 lg:pb-28">
       <div className="grain pointer-events-none absolute inset-0 opacity-60" />
       <div
         className="pointer-events-none absolute -right-32 top-20 h-[480px] w-[480px] rounded-full bg-primary/15 blur-[120px]"

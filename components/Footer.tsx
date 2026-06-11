@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="border-t border-border bg-surface py-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 lg:flex-row lg:justify-between lg:px-10">
         <div>
-          <BrandLogo variant="footer" className="opacity-90" />
+          <BrandLogo variant="footer" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
             The coordination layer for intra-African wholesale trade. Local markets. Verified
             settlement. Continental ambition.

@@ -35,12 +35,13 @@ export function BrandLogo({ variant = 'header', className = '' }: Props) {
         }`}
       />
       <div
-        className="pointer-events-none absolute flex justify-between font-sans font-bold uppercase leading-none text-white"
+        className="pointer-events-none absolute flex justify-between font-sans font-bold uppercase leading-none"
         style={{
           left: layout.left,
           width: layout.width,
           top: layout.top,
           fontSize: layout.fontSize,
+          color: '#FFFFFF',
         }}
         aria-hidden
       >

@@ -17,13 +17,13 @@ const MARKET_BAND = {
     left: '50.275%',
     width: '40.814%',
     top: '63.5%',
-    fontSize: 'clamp(9px, 0.95vw, 12.5px)',
+    fontSize: 'clamp(10px, 1.05vw, 13px)',
   },
   footer: {
     left: '50.275%',
     width: '40.814%',
     top: '63.5%',
-    fontSize: '12.5px',
+    fontSize: '13px',
   },
 } as const;
 

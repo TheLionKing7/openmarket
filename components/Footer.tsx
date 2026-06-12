@@ -9,7 +9,7 @@ export function Footer() {
         <div>
           <BrandLogo variant="footer" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-            The coordination layer for intra-African wholesale trade. Local markets. Verified
+            The intelligent coordination layer for intra-African wholesale trade. Local markets. Verified
             settlement. Continental ambition.
           </p>
         </div>

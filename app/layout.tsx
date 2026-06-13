@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'The coordination layer for open-market commerce across Africa. Restock, fulfill, and settle with verified payments — from Lagos Island to Kariakoo.',
   openGraph: {
     title: 'OpenMarket Africa',
-    description: 'Premier B2B trade infrastructure for Africa\'s open markets.',
+    description: "Premier B2B trade infrastructure for Africa's open markets.",
     images: ['/logo.svg'],
   },
 };
@@ -39,11 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${display.variable} ${sans.variable} ${mono.variable} bg-ink overflow-x-hidden`}
+      className={`${display.variable} ${sans.variable} ${mono.variable} overflow-x-hidden`}
     >
-      <body className="min-h-screen bg-ink font-sans text-[#f4f6f8] antialiased overflow-x-hidden">
-        {children}
-      </body>
+      <body className="min-h-screen overflow-x-hidden antialiased">{children}</body>
     </html>
   );
 }

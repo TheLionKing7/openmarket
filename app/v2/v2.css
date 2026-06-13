@@ -1,0 +1,18 @@
+.v2-theme {
+  --v2-paper: #f4f2eb;
+  --v2-paper-deep: #ebe8df;
+  --v2-ink: #0a0f14;
+  --v2-green: #1b5e3b;
+  --v2-green-soft: #e8f2ec;
+  --v2-gold: #c9a227;
+  --v2-gold-soft: #f5ecd0;
+  --v2-muted: #5c6b78;
+  --v2-line: rgba(10, 15, 20, 0.1);
+  --v2-line-strong: rgba(10, 15, 20, 0.18);
+  background-color: var(--v2-paper);
+  color: var(--v2-ink);
+}
+
+.v2-theme ::selection {
+  background: color-mix(in srgb, var(--v2-gold) 35%, white);
+}

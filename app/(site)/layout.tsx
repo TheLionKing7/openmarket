@@ -16,12 +16,12 @@ const sans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: 'OpenMarket Africa — Design preview (v2)',
+  title: 'OpenMarket Africa — Intra-African wholesale trade infrastructure',
   description:
-    'Preview of the OpenMarket landing redesign — operational architecture, verified settlement, pan-African wholesale infrastructure.',
+    'The coordination layer for open-market commerce across Africa. Restock, fulfill, and settle with verified payments — from Lagos Island to Kariakoo.',
 };
 
-export default function V2Layout({ children }: { children: React.ReactNode }) {
+export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`v2-theme min-h-screen font-[family-name:var(--font-v2-sans)] ${display.variable} ${sans.variable}`}

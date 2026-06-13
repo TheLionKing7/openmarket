@@ -71,9 +71,9 @@ function Arrow({ d, dashed = false, gold = false }: { d: string; dashed?: boolea
   );
 }
 
-export function OperationalArchitecture() {
+export function OperationalArchitecture({ centered = false }: { centered?: boolean }) {
   return (
-    <figure className="w-full">
+    <figure className={`w-full ${centered ? 'mx-auto' : ''}`}>
       <div className="overflow-x-auto rounded-xl border border-[var(--v2-line-strong)] bg-white p-4 shadow-[0_24px_60px_-40px_rgba(10,15,20,0.35)] sm:p-6">
         <svg
           viewBox="0 0 920 560"
@@ -125,7 +125,7 @@ export function OperationalArchitecture() {
           </text>
 
           <Node x={40} y={250} w={150} h={56} label="Merchant" sub="Open-market shop" fill="var(--v2-green-soft)" stroke="var(--v2-green)" />
-          <Node x={230} y={250} w={150} h={56} label="Payment rail" sub="Paystack verify" />
+          <Node x={230} y={250} w={150} h={56} label="Payment rail" sub="PAPSS verify" />
           <Arrow d="M 190 278 L 228 278" />
           <Arrow d="M 380 278 L 318 214" />
           <Arrow d="M 520 214 L 600 278" />
@@ -133,7 +133,7 @@ export function OperationalArchitecture() {
           <Node x={600} y={250} w={150} h={56} label="Distributor" sub="VWL · 95% payout" fill="var(--v2-green-soft)" stroke="var(--v2-green)" />
           <Node x={730} y={250} w={150} h={56} label="Fulfillment" sub="Allocate · pack · dispatch" />
 
-          <Arrow d="M 750 278 L 728 278" />
+          <Arrow d="M 750 278 L 730 278" />
 
           {/* Split annotation */}
           <rect x={350} y={248} width={220} height={60} rx={6} fill="white" stroke="var(--v2-gold)" strokeWidth={1.5} />
@@ -175,7 +175,7 @@ export function OperationalArchitecture() {
           </text>
         </svg>
       </div>
-      <figcaption className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--v2-muted)]">
+      <figcaption className={`mt-4 text-sm leading-relaxed text-[var(--v2-muted)] ${centered ? 'mx-auto max-w-2xl text-center' : 'max-w-3xl'}`}>
         The infrastructure layer merchants feel as verified payment and settlement — not a consumer
         marketplace. Upstream manufacturers consume aggregated signals; logistics partners operate
         delivery on opt-in trade lanes.

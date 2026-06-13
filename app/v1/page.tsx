@@ -8,8 +8,8 @@ import { TrustAndData } from '@/components/v1/TrustAndData';
 import { RegisterSection } from '@/components/v1/RegisterSection';
 import { Footer } from '@/components/v1/Footer';
 
-/** Current production landing (design v1). Compare at /v2 */
-export default function HomePage() {
+/** Archived design v1 — available at /v1 for reference only */
+export default function V1ArchivePage() {
   return (
     <main className="min-h-screen w-full overflow-x-hidden bg-ink">
       <Header />

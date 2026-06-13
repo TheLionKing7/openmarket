@@ -14,6 +14,9 @@ type LeadRecord = {
 const DATA_DIR = path.join(process.cwd(), '.data');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
 
+const PLATFORM_URL =
+  process.env.PLATFORM_API_URL || process.env.NEXT_PUBLIC_PLATFORM_URL || 'http://localhost:3099';
+
 async function readLeads(): Promise<LeadRecord[]> {
   try {
     const raw = await readFile(LEADS_FILE, 'utf8');
@@ -21,6 +24,13 @@ async function readLeads(): Promise<LeadRecord[]> {
   } catch {
     return [];
   }
+}
+
+async function saveLocalLead(lead: LeadRecord) {
+  await mkdir(DATA_DIR, { recursive: true });
+  const leads = await readLeads();
+  leads.push(lead);
+  await writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf8');
 }
 
 export async function POST(request: Request) {
@@ -44,23 +54,33 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Name, phone, and business name are required' }, { status: 400 });
   }
 
+  const payload: Record<string, string> = { audience };
+  for (const [key, value] of Object.entries(body)) {
+    if (value != null && String(value).trim()) {
+      payload[key] = String(value).trim();
+    }
+  }
+
+  try {
+    const res = await fetch(`${PLATFORM_URL}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return Response.json({ ok: true, id: data.leadId, provisioned: data.provisioned });
+    }
+  } catch {
+    // fall through to local backup
+  }
+
   const lead: LeadRecord = {
     id: `lead_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
     audience: audience as AudienceId,
     submittedAt: new Date().toISOString(),
+    ...payload,
   };
-
-  for (const [key, value] of Object.entries(body)) {
-    if (key === 'audience') continue;
-    if (value != null && String(value).trim()) {
-      lead[key] = String(value).trim();
-    }
-  }
-
-  await mkdir(DATA_DIR, { recursive: true });
-  const leads = await readLeads();
-  leads.push(lead);
-  await writeFile(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf8');
-
-  return Response.json({ ok: true, id: lead.id });
+  await saveLocalLead(lead);
+  return Response.json({ ok: true, id: lead.id, provisioned: null, fallback: true });
 }

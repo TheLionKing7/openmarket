@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 3000",
     "typecheck": "tsc --noEmit",
-    "prepare": "node -e \"if (!process.env.CI && !process.env.VERCEL) require('child_process').execSync('husky',{stdio:'inherit'})\""
+    "prepare": "node -e \"const fs=require('fs'),p=require('path'),c=require('child_process');const s=p.join(__dirname,'../scripts/setup-husky.mjs');if(!process.env.CI&&!process.env.VERCEL&&fs.existsSync(s))c.execSync('node '+JSON.stringify(s),{stdio:'inherit'})\""
   },
   "dependencies": {
     "next": "^15.3.3",
@@ -21,7 +21,6 @@
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.4",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3",
-    "husky": "^9.1.7"
+    "typescript": "^5.8.3"
   }
 }

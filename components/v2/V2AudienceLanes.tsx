@@ -17,7 +17,7 @@ export function V2AudienceLanes() {
           {AUDIENCES.map((a) => (
             <Link
               key={a.id}
-              href={`/v2${a.anchor}`}
+              href={a.anchor}
               className="group rounded-lg border border-[var(--v2-line)] bg-white p-5 transition hover:border-[var(--v2-green)] hover:shadow-[0_12px_40px_-24px_rgba(27,94,59,0.35)]"
             >
               <p className="text-xs font-semibold uppercase tracking-wider text-[var(--v2-green)]">

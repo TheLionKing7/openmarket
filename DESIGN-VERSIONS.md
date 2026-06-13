@@ -1,32 +1,37 @@
 # Website design versions
 
-Two landing designs ship side-by-side for comparison:
+## Production (deployed)
 
-| Route | Branch baseline | Description |
-|-------|-----------------|-------------|
-| `/` | `design-v1-baseline` | Current dark editorial landing |
-| `/v2` | `design-v2` | Light redesign with operational architecture chart |
+| Route | Description |
+|-------|-------------|
+| `/` | **Current production** — light editorial landing (design v2) |
+| `/v2` | Redirects to `/` (legacy preview URL) |
 
-## Compare locally
+## Archived (not deployed, kept in repo)
+
+| Route | Branch | Description |
+|-------|--------|-------------|
+| `/v1` | `design-v1-baseline` | Dark editorial landing (v1). `robots: noindex` — not linked from production. |
+
+## Local development
 
 ```bash
 cd website && npm run dev
 ```
 
-- **v1:** http://localhost:3000/
-- **v2:** http://localhost:3000/v2
-
-Header links on each version cross-navigate.
+- **Production home:** http://localhost:3000/
+- **Archived v1:** http://localhost:3000/v1
 
 ## Git branches
 
-- `design-v1-baseline` — frozen snapshot of v1 before redesign work
-- `design-v2` — active redesign (includes both routes)
+- `main` — production (v2 at `/`)
+- `design-v2` — development branch for v2 work (merge to `main`)
+- `design-v1-baseline` — frozen snapshot of v1 before redesign; source for `/v1` archive
 
-To promote v2 to production: merge `design-v2` → `main`, then optionally remove `(v1)` route group or swap default.
+## v2 design (production)
 
-## v2 design direction
-
-- **Impeccable** brand register + anti-pattern audit (avoid Cormorant/mono-eyebrow/card-grid defaults)
-- **frontend-design** — market-floor thesis, logo-derived green/gold palette, one signature element
-- **Signature:** `components/v2/OperationalArchitecture.tsx` — SVG infrastructure diagram (planned in original landing brief, missing from v1)
+- Light paper theme (`#F4F2EB`) with PNG logo lockup
+- v1 expressive copy (hero, positioning, audience detail, trust/data)
+- Full dual market marquee
+- Operational architecture diagram (`#architecture`); payment rail **PAPSS verify**
+- Five lanes grid (`V2AudienceLanes`)

@@ -11,15 +11,15 @@ export function V2Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--v2-line)] bg-[var(--v2-paper)]/95 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:h-[4.25rem]">
-        <Link href="/v2" className="flex min-w-0 items-center">
-          <BrandLogo variant="header" className="brightness-0" />
+        <Link href="/" className="flex shrink-0 items-center" aria-label="OpenMarket Africa home">
+          <BrandLogo variant="header" theme="light" />
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {SITE_NAV.map((item) => (
             <Link
               key={item.href}
-              href={`/v2${item.href}`}
+              href={item.href}
               className="text-sm font-medium text-[var(--v2-muted)] transition hover:text-[var(--v2-ink)]"
             >
               {item.label}
@@ -29,13 +29,7 @@ export function V2Header() {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <Link
-            href="/"
-            className="hidden text-xs font-medium text-[var(--v2-muted)] underline-offset-2 hover:text-[var(--v2-ink)] hover:underline sm:inline"
-          >
-            Current site
-          </Link>
-          <Link
-            href="/v2#register"
+            href="#register"
             className="rounded-md bg-[var(--v2-green)] px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
           >
             Register
@@ -58,7 +52,7 @@ export function V2Header() {
             {SITE_NAV.map((item) => (
               <li key={item.href}>
                 <Link
-                  href={`/v2${item.href}`}
+                  href={item.href}
                   className="block rounded-md px-3 py-2 text-sm text-[var(--v2-muted)] hover:bg-[var(--v2-paper-deep)]"
                   onClick={() => setOpen(false)}
                 >
@@ -66,11 +60,6 @@ export function V2Header() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="/" className="block px-3 py-2 text-sm text-[var(--v2-muted)]" onClick={() => setOpen(false)}>
-                View current site →
-              </Link>
-            </li>
           </ul>
         </nav>
       )}
